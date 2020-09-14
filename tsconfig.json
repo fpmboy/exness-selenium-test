@@ -1,0 +1,27 @@
+{
+    "compilerOptions": {
+    "module": "commonjs",
+        "lib": ["es5", "es6", "dom"],
+        "target": "es6",
+        "noImplicitAny": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "rootDir": "./",
+        "outDir": "./build",
+        "sourceMap": true,
+        "experimentalDecorators": true,
+        "moduleResolution": "node",
+        "allowJs": true,
+        "types": [
+            "node",
+            "@wdio/sync",
+            "@wdio/mocha-framework"
+        ]
+},
+    "exclude": [
+        "node_modules",
+        "build",
+        "cfg",
+        "**/*.js"
+    ]
+}
