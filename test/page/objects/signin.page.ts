@@ -1,25 +1,33 @@
 import { Page, PageType } from './page'
 import { AccountsPage } from './accounts.page'
 
+const enum selector {
+    formSignIn = `<signin-form>`,
+    inputLogin = `#login`,
+    inputPassword = `#password`,
+    btnSubmit = `button[type="submit"]`
+}
+const uri = '/accounts/sign-in';
+
 export class SignInPage extends Page {
 
     /**
      * all selectors are specified in this sections throw getters
      */
     get formSignIn() {
-        return $(`<signin-form>`);
+        return $(selector.formSignIn);
     }
 
     get inputLogin() {
-        return this.formSignIn.$(`#login`);
+        return this.formSignIn.$(selector.inputLogin);
     }
 
     get inputPassword() {
-        return this.formSignIn.$(`#password`);
+        return this.formSignIn.$(selector.inputPassword);
     }
 
     get btnSubmit() {
-        return this.formSignIn.$(`button[type="submit"]`);
+        return this.formSignIn.$(selector.btnSubmit);
     }
 
     /**
@@ -50,6 +58,6 @@ export class SignInPage extends Page {
     }
 
     open ():Page {
-        return super.open('accounts/sign-in');
+        return super.open(uri);
     }
 }

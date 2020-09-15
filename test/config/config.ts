@@ -1,15 +1,20 @@
 export enum newAccountType {
-    Standart = 'Standart',
+    Standard = 'Standard',
     RawSpread = 'Raw Spread',
-    Real = 'Real',
     Zero = 'Zero',
     Pro = 'Pro'
 }
 
+export enum newAccountPlatform {
+    MT4 = 'MT4',
+    MT5 = 'MT5'
+}
+
 export interface AccountUser {
     title: string,
-    password: string,
-    newType?: newAccountType
+    pass?: string,
+    type?: newAccountType,
+    platform?: newAccountPlatform
 }
 
 export interface User {
@@ -42,8 +47,9 @@ export const Opts: { [key: string]: Options } = {
             password: 'Ex11235813',
             newAccount: {
                 title: getRandomName(5),
-                password: 'Ex11235813',
-                newType: newAccountType.Zero
+                pass: 'Ex11235813',
+                type: newAccountType.Zero,
+                platform: newAccountPlatform.MT4
             }
         }
     },
@@ -55,8 +61,7 @@ export const Opts: { [key: string]: Options } = {
             password: 'Ex11235813',
             newAccount: {
                 title: getRandomName(10),
-                password: 'Ex11235813',
-                newType: newAccountType.RawSpread
+                pass: 'Ex11235813'
             }
         }
     }

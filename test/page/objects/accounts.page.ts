@@ -1,8 +1,20 @@
 import {Page, PageType} from './page'
 import {NewAccountPage} from "./new.account.page";
-import {ArchivedAccount} from '../pageElements/archived.account.element';
-import {DemoAccount} from '../pageElements/demo.account.element';
-import {AccountUser} from '../config/config';
+import {ArchivedAccount} from '../elements/archived.account.element';
+import {DemoAccount} from '../elements/demo.account.element';
+import {AccountUser} from '../../config/config';
+
+
+const enum selector {
+    formAccounts = `[name="accountsContainer"]`,
+    selectorSort = `#account_sort_select`,
+    togglerView = `[data-walkthrough="accountListMode"]`,
+    btnNewAccount = `[data-test="accounts-open-new-account-btn"]`,
+    containerListAccounts = `[data-test="accounts-page-active-accounts-section"]`,
+    demoTab = `[class*=Tabs_container]`,
+    archivedTab = `[class*=Tabs_container]`
+}
+const uri = '/pa/';
 
 export class AccountsPage extends Page {
 
@@ -10,34 +22,34 @@ export class AccountsPage extends Page {
      * all selectors are specified in this sections throw getters
      */
     get formAccounts() {
-        return $(`[name="accountsContainer"]`);
+        return $(selector.formAccounts);
     }
 
     get selectorSort() {
-        return this.formAccounts.$(`#account_sort_select`);
+        return this.formAccounts.$(selector.selectorSort);
     }
 
     get togglerView() {
-        return this.formAccounts.$(`[data-walkthrough="accountListMode"]`);
+        return this.formAccounts.$(selector.togglerView);
     }
 
     get buttonNewAccount() {
-        return this.formAccounts.$(`[data-test="accounts-open-new-account-btn"]`);
+        return this.formAccounts.$(selector.btnNewAccount);
     }
+
     /**
      * a methods to encapsulate automation code to interact with the page
      */
-
     openNewAccount(accToCreate: AccountUser) {
         this.buttonNewAccount.click();
-        let newAccountPage = new NewAccountPage();
-        newAccountPage.c
+        new NewAccountPage().createDemo(accToCreate);
+        return this
     }
 
     private getAccount(titleAccount: string): WebdriverIO.Element {
         let elementToFind = null;
         //get list of elements aka accounts
-        let listArchived = this.formAccounts.$(`[data-test="accounts-page-active-accounts-section"]`).$$('./div');
+        let listArchived = this.formAccounts.$(selector.containerListAccounts).$$('./div');
         //iterate throw list and find which matches titleAccount
         listArchived.forEach((elem) => {
             if (elem.$('./div[2]').getText().includes(titleAccount)) {
@@ -47,15 +59,14 @@ export class AccountsPage extends Page {
         return elementToFind;
     }
 
-    //bad fast selectors. Can be xpath with partial matching attribute name, but slow.
-    getArchived(titleAccount: string): ArchivedAccount {
-        this.formAccounts.$(`./div[2]/div[3]`).click();
-        return new ArchivedAccount(this.getAccount(titleAccount));
+    getDemo(account: AccountUser): DemoAccount {
+        this.formAccounts.$(selector.demoTab).$('./div[2]').click();
+        return new DemoAccount(this.getAccount(account.title));
     }
 
-    getDemo(titleAccount: string): DemoAccount {
-        this.formAccounts.$(`./div[2]/div[2]`).click();
-        return new DemoAccount(this.getAccount(titleAccount));
+    getArchived(account: AccountUser): ArchivedAccount {
+        this.formAccounts.$(selector.archivedTab).$('./div[3]').click();
+        return new ArchivedAccount(this.getAccount(account.title));
     }
 
     /**
@@ -76,6 +87,6 @@ export class AccountsPage extends Page {
     }
 
     open (): Page {
-        return super.open('pa/');
+        return super.open(uri);
     }
 }
