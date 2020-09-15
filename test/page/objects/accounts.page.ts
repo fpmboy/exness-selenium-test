@@ -11,8 +11,9 @@ const enum selector {
     togglerView = `[data-walkthrough="accountListMode"]`,
     btnNewAccount = `[data-test="accounts-open-new-account-btn"]`,
     containerListAccounts = `[data-test="accounts-page-active-accounts-section"]`,
-    demoTab = `[class*=Tabs_container]`,
-    archivedTab = `[class*=Tabs_container]`
+    tabList = `[class*=Tabs_container]`,
+    tabDemo = `./div[2]`,
+    tabArchived = `./div[3]`
 }
 const uri = '/pa/';
 
@@ -26,46 +27,62 @@ export class AccountsPage extends Page {
     }
 
     get selectorSort() {
-        return this.formAccounts.$(selector.selectorSort);
+        return $(selector.selectorSort);
     }
 
     get togglerView() {
-        return this.formAccounts.$(selector.togglerView);
+        return $(selector.togglerView);
     }
 
     get buttonNewAccount() {
-        return this.formAccounts.$(selector.btnNewAccount);
+        return $(selector.btnNewAccount);
     }
 
+    get tabList() {
+        return $(selector.tabList);
+    }
+
+    get listAccounts() {
+        return $(selector.containerListAccounts);
+    }
+
+    get tabDemo() {
+        return this.tabList.$(selector.tabDemo);
+    }
+
+    get tabArchived() {
+        return this.tabList.$(selector.tabArchived);
+    }
     /**
      * a methods to encapsulate automation code to interact with the page
      */
-    openNewAccount(accToCreate: AccountUser) {
-        this.buttonNewAccount.click();
-        new NewAccountPage().createDemo(accToCreate);
-        return this
+    private getAccount(titleAccount: string): WebdriverIO.Element {
+        let elementToFind = this.listAccounts.$$('./div').filter(
+            el => el.getText().includes(titleAccount));
+        return elementToFind.pop();
     }
 
-    private getAccount(titleAccount: string): WebdriverIO.Element {
-        let elementToFind = null;
-        //get list of elements aka accounts
-        let listArchived = this.formAccounts.$(selector.containerListAccounts).$$('./div');
-        //iterate throw list and find which matches titleAccount
-        listArchived.forEach((elem) => {
-            if (elem.$('./div[2]').getText().includes(titleAccount)) {
-                elementToFind = elem;
+    openNewDemo(accToCreate: AccountUser) {
+        this.buttonNewAccount.click();
+        new NewAccountPage().createDemo(accToCreate);
+        this.formAccounts.waitUntil(() => this.getAccount(accToCreate.title) !== undefined,
+            {
+                timeout: 10000,
+                interval: 1000,
+                timeoutMsg: `New Demo ${accToCreate.type + accToCreate.title} should appear in 10! sec`
             }
-        });
-        return elementToFind;
+        );
     }
 
     getDemo(account: AccountUser): DemoAccount {
-        this.formAccounts.$(selector.demoTab).$('./div[2]').click();
+        this.tabDemo.click();
+        this.listAccounts.waitForEnabled();
         return new DemoAccount(this.getAccount(account.title));
     }
 
     getArchived(account: AccountUser): ArchivedAccount {
-        this.formAccounts.$(selector.archivedTab).$('./div[3]').click();
+        this.tabArchived.click();
+        this.listAccounts.waitForEnabled();
         return new ArchivedAccount(this.getAccount(account.title));
     }
 

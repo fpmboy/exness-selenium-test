@@ -53,7 +53,8 @@ exports.config = {
         maxInstances: 5,
         //
         browserName: 'chrome',
-        acceptInsecureCerts: true
+        acceptInsecureCerts: true,
+        outputDir: './logs'
         // If outputDir is provided WebdriverIO can capture driver session logs
         // it is possible to configure which logTypes to include/exclude.
         // excludeDriverLogs: ['*'], // pass '*' to exclude all driver session logs
@@ -177,11 +178,11 @@ exports.config = {
      * @param {Array.<Object>} capabilities list of capabilities details
      * @param {Array.<String>} specs List of spec file paths that are to be run
      */
-    before: function (capabilities, specs) {
-        browser.addCommand("clearWithKeys", function () {
-           this.keys(['ControlRight','KeyA','Delete']);
-        });
-    },
+    // before: function (capabilities, specs) {
+    //     browser.addCommand("clearWithKeys", function () {
+    //        this.keys(['ControlRight','KeyA','Delete']);
+    //     });
+    // },
     /**
      * Runs before a WebdriverIO command gets executed.
      * @param {String} commandName hook command name

@@ -46,7 +46,7 @@ export const Opts: { [key: string]: Options } = {
             login: 'danenkouskrill@gmail.com',
             password: 'Ex11235813',
             newAccount: {
-                title: getRandomName(5),
+                title: `#${getRandomName(5)}`,
                 pass: 'Ex11235813',
                 type: newAccountType.Zero,
                 platform: newAccountPlatform.MT4
@@ -60,8 +60,10 @@ export const Opts: { [key: string]: Options } = {
             login: 'danenkouskrill@gmail.com',
             password: 'Ex11235813',
             newAccount: {
-                title: getRandomName(10),
-                pass: 'Ex11235813'
+                title: `#${getRandomName(5)}`,
+                pass: 'Ex11235813',
+                platform: newAccountPlatform.MT5,
+                type: newAccountType.Zero
             }
         }
     }

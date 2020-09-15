@@ -13,26 +13,20 @@ describe(`Test with ${JSON.stringify(newAcc)}`, () => {
     it('should login with valid credentials', () => {
         signInPage.open().waitLoaded({timeout: 5000});
         signInPage.login(login, password).waitLoaded({timeout: 10000});
-        expect(accountsPage.formAccounts).toBeDisplayed();
+        expect(accountsPage.formAccounts).toBeEnabled();
     });
 
     it(`should create new account and appear in demo`, () => {
-        accountsPage.openNewAccount(newAcc).waitLoaded();
-        expect(accountsPage.getDemo(newAcc).element).toBeDisplayed({wait: 5000});
+        accountsPage.openNewDemo(newAcc);
+        expect(accountsPage.getDemo(newAcc).element).toBeDisplayed();
     });
 
     it('should disappear from demo when archived', () => {
-        let demoAcc = accountsPage.getDemo(newAcc);
-
-        demoAcc.archive();
-        expect(demoAcc.element).not.toBeExisting();
+        accountsPage.getDemo(newAcc).archive();
+        expect(accountsPage.getDemo(newAcc).element).not.toBeExisting({wait: 5000});
     });
 
     it('should appear in archived', () => {
-        let archivedAcc = accountsPage.getArchived(newAcc);
-
-        expect(archivedAcc.element).toBeDisplayed();
-        expect(archivedAcc.numberAccount).toEqual(newAcc.title);
-        expect(archivedAcc.platformAccount).toEqual(newAcc.platform);
+        expect(accountsPage.getArchived(newAcc).element).toBeDisplayed();
     });
 });

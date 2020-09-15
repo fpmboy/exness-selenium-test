@@ -1,6 +1,10 @@
 import {AccountElement, AccountType} from "./account.element";
 
-
+const enum selector {
+    buttonReactivate = `button[data-test="account-card-restore-button"]`,
+    numberAccount = './div[2]',
+    platformAccount = './div[1]/div[2]'
+}
 
 export class ArchivedAccount extends AccountElement<AccountType> {
 
@@ -8,7 +12,7 @@ export class ArchivedAccount extends AccountElement<AccountType> {
      * all selectors are specified in this sections throw getters
      */
     get buttonReactivate() {
-        return this.element.$(`button[data-test="account-card-restore-button"]`);
+        return this.element.$(selector.buttonReactivate);
     }
 
     /**
@@ -37,12 +41,11 @@ export class ArchivedAccount extends AccountElement<AccountType> {
             && this.buttonReactivate.waitForDisplayed(options));
     }
 
-    //bad fast selectors. Can be xpath with partial matching attribute name, but slow
     get numberAccount(): string {
-        return this.element.$('./div[2]').getText();
+        return this.element.$(selector.numberAccount).getText();
     }
 
     get platformAccount(): string {
-        return this.element.$('./div[1]/div[2]').getText();
+        return this.element.$(selector.platformAccount).getText();
     }
 }

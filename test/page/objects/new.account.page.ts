@@ -2,7 +2,6 @@ import {Page, PageType} from './page'
 import {AccountUser, newAccountPlatform, newAccountType} from '../../config/config';
 
 const enum selector {
-    headerNewDemoForm = `h1=Open New Account`,
     formNewDemoType = `[class*=OpenAccount_accountsTypes]`,
     btnNewDemoStandard = `[href="/pa/new-account/mt5_mini_trial_vc"]`,
     btnNewDemoRawSpread = `[href="/pa/new-account/mt5_raw_trial_vc"]`,
@@ -52,7 +51,6 @@ export class NewAccountPage extends Page {
     }
 
     get formNewDemoType(){
-        // return $(selector.headerNewDemoForm).$('../..');
         return $(selector.formNewDemoType);
     }
 
@@ -110,10 +108,13 @@ export class NewAccountPage extends Page {
         }
 
         this.inputTitle.scrollIntoView();
-        this.inputTitle.waitForDisplayed({timeout: 1000});
-        this.inputTitle.clearWithKeys();
-        this.inputTitle.setValue(accToCreate.title);
-        this.inputPassword.setValue(accToCreate.pass);
+        this.inputTitle.waitForEnabled({timeout: 5000});
+        this.inputTitle.addValue(accToCreate.title);
+
+        this.inputPassword.waitForEnabled({timeout: 5000});
+        this.inputPassword.addValue(accToCreate.pass);
+
+        this.btnCreateAccount.waitForEnabled({timeout: 5000});
         this.btnCreateAccount.click();
     }
 
