@@ -26,7 +26,7 @@ We would like to see your own tests which cover the user story mentioned above.
     * "wdio-geckodriver-service" - service to automatically start geckodriver
 
 ## Install process
-System should have installed Google Chrome and Firefox. Also globally installed **nodejs** and **npm**
+System should have installed Google Chrome and Firefox. Also globally installed **node** and **npm**
 ```
 npm install
 ```
@@ -75,9 +75,9 @@ global variable **$** will provide access to all available drivers e.g. Chrome, 
    - **layout**: all selectors for page elements or objects inside *./test/layout/desktop.ts*
     
 * #### configurator:
-   - run tests in parallel mode: execute command *npm run tests-parallel-prod*
-   - ability to run tests for different browsers by configuring: 2 different configs created for firefox and chrome, execute commands *npm run tests-chrome-prod* or *npm run tests-firefox-prod* 
-   - ability to run tests for different environments(urls) by configuring/by command-line: parameter **baseUrl** inside configs files, or run in console:
+   - **run tests in parallel mode**: execute command *npm run tests-parallel-prod*
+   - **ability to run tests for different browsers by configuring**: 2 different configs created for firefox and chrome, execute commands *npm run tests-chrome-prod* or *npm run tests-firefox-prod* 
+   - **ability to run tests for different environments(urls) by configuring/by command-line**: parameter **baseUrl** inside configs files, or run in console:
 ```
 tsc && ./node_modules/.bin/wdio run cfg/chrome.wdio.conf.js --baseUrl 'https://dev-url.com/'
 ```
