@@ -1,12 +1,13 @@
 import {SignInPage} from '../page/objects/signin.page';
 import {AccountsPage} from "../page/objects/accounts.page";
-import {getAccountWithRandomName as rndAccount, Opts} from '../config/config';
+import {getAccountWithRandomName as rndAccount} from '../config/config';
 import {newAccountPlatform, newAccountType} from '../config/config';
+import {Opts} from '../config/config';
 
 
 const signInPage = new SignInPage();
 const accountsPage = new AccountsPage();
-const { login, password } = Opts['prod'][0].user;
+const { login, password } = Opts['prod'][1].user;
 const newAcc = rndAccount(5);
 
 describe(`Positive test with ${newAcc.title}`, () => {
@@ -17,9 +18,9 @@ describe(`Positive test with ${newAcc.title}`, () => {
         expect(accountsPage.formAccounts).toBeDisplayed();
     });
 
-    it(`should create new Standard MT4 account and appear in demo`, () => {
-        newAcc.platform = newAccountPlatform.MT4;
-        newAcc.type = newAccountType.Standard;
+    it(`should create new MT5 RawSpread account and appear in demo`, () => {
+        newAcc.platform = newAccountPlatform.MT5;
+        newAcc.type = newAccountType.RawSpread;
         accountsPage.openNewDemo(newAcc);
         expect(accountsPage.getDemo(newAcc).element).toBeDisplayed();
     });

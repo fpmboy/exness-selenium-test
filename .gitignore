@@ -3,5 +3,7 @@ node_modules
 .DS_Store
 .idea
 *.js.map
-logs
+logs/*
 *.log
+screenshots/*
+*.jpg

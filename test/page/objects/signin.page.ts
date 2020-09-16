@@ -19,15 +19,15 @@ export class SignInPage extends Page {
     }
 
     get inputLogin() {
-        return this.formSignIn.$(selector.inputLogin);
+        return $(selector.inputLogin);
     }
 
     get inputPassword() {
-        return this.formSignIn.$(selector.inputPassword);
+        return $(selector.inputPassword);
     }
 
     get btnSubmit() {
-        return this.formSignIn.$(selector.btnSubmit);
+        return $(selector.btnSubmit);
     }
 
     /**
@@ -45,16 +45,16 @@ export class SignInPage extends Page {
      */
     public static type = PageType.SignInPage;
 
-    waitOpened(options?: WebdriverIO.WaitForOptions): boolean {
-        return this.formSignIn.waitForExist(options);
+    waitOpened(options?: WebdriverIO.WaitForOptions) {
+        this.formSignIn.waitForExist(options);
     }
 
-    waitLoaded(options?: WebdriverIO.WaitForOptions): boolean {
-        return ( this.waitOpened(options)
-            && this.formSignIn.waitForDisplayed(options)
-            && this.inputLogin.waitForDisplayed(options)
-            && this.inputPassword.waitForDisplayed(options)
-            && this.btnSubmit.waitForDisplayed(options));
+    waitLoaded(options?: WebdriverIO.WaitForOptions) {
+        this.waitOpened(options);
+        this.formSignIn.waitForDisplayed(options);
+        this.inputLogin.waitForDisplayed(options);
+        this.inputPassword.waitForDisplayed(options);
+        this.btnSubmit.waitForDisplayed(options);
     }
 
     open ():Page {

@@ -11,8 +11,8 @@ export enum PageType {
 export abstract class Page {
 
     public static type: PageType;
-    public abstract waitOpened(options?: WebdriverIO.WaitForOptions): boolean;
-    public abstract waitLoaded(options?: WebdriverIO.WaitForOptions): boolean;
+    public abstract waitOpened(options?: WebdriverIO.WaitForOptions): void;
+    public abstract waitLoaded(options?: WebdriverIO.WaitForOptions): void;
 
     //opens wdio.cong.js:baseUrl + uri in browser
     open (uri: string): Page {

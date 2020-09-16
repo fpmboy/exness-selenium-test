@@ -23,48 +23,40 @@ export interface User {
     newAccount: AccountUser;
 }
 
-// export enum driverType {
-//     Web, Android, mobileWeb, iOS
-// }
-
 export interface Options {
     prefixSelector?: string;
-    // envUrl?: string;
     user: User;
-    // driver: driverType;
 }
 
-function getRandomName(length: number): string {
-    return (Math.random() +1).toString(36).substr(2, length);
+export function getAccountWithRandomName(lengthName: number): AccountUser {
+    let strRandom = (Math.random() +1).toString(36).substr(2, lengthName);
+    return {
+        title: `#${strRandom}`,
+        pass: 'Ex11235813'
+    };
 }
 
-export const Opts: { [key: string]: Options } = {
-    test: {
-        prefixSelector: '#',
-        // envUrl: 'https://my.exness.com/',
-        user: {
-            login: 'danenkouskrill@gmail.com',
-            password: 'Ex11235813',
-            newAccount: {
-                title: `#${getRandomName(5)}`,
-                pass: 'Ex11235813',
-                type: newAccountType.Zero,
-                platform: newAccountPlatform.MT4
+export const Opts: { [key: string]: Options[] } = {
+    test: [
+        { user: {
+                login: 'danenkouskrill@gmail.com',
+                password: 'Ex11235813',
+                newAccount: getAccountWithRandomName(4)
+                }
             }
-        }
-    },
-    prod: {
-        prefixSelector: '#',
-        // envUrl: 'https://my.exness.com/',
-        user: {
-            login: 'danenkouskrill@gmail.com',
-            password: 'Ex11235813',
-            newAccount: {
-                title: `#${getRandomName(5)}`,
-                pass: 'Ex11235813',
-                platform: newAccountPlatform.MT5,
-                type: newAccountType.Zero
+        ],
+    prod: [
+        { user: {
+                login: 'danenkouskrill@gmail.com',
+                password: 'Ex11235813',
+                newAccount: getAccountWithRandomName(4)
             }
-        }
-    }
+        },
+        { user: {
+                login: 'fpmboy@gmail.com',
+                password: 'Ex11235813',
+                newAccount: getAccountWithRandomName(4)
+            }
+        },
+    ],
 };

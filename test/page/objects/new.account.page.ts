@@ -75,6 +75,9 @@ export class NewAccountPage extends Page {
      * a methods to encapsulate automation code to interact with the page
      */
     createDemo(accToCreate: AccountUser) {
+        let options: WebdriverIO.WaitForOptions = {timeout: 5000, interval: 1000};
+
+        this.formNewDemoType.waitForDisplayed(options);
 
         //click on button to create account of correct type
         switch (accToCreate.type) {
@@ -108,13 +111,13 @@ export class NewAccountPage extends Page {
         }
 
         this.inputTitle.scrollIntoView();
-        this.inputTitle.waitForEnabled({timeout: 5000});
+        this.inputTitle.waitForEnabled(options);
         this.inputTitle.addValue(accToCreate.title);
 
-        this.inputPassword.waitForEnabled({timeout: 5000});
+        this.inputPassword.waitForEnabled(options);
         this.inputPassword.addValue(accToCreate.pass);
 
-        this.btnCreateAccount.waitForEnabled({timeout: 5000});
+        this.btnCreateAccount.waitForClickable(options);
         this.btnCreateAccount.click();
     }
 

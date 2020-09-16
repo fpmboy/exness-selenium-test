@@ -13,25 +13,25 @@ export class DemoAccount extends AccountElement<AccountType> {
     /**
      * all selectors are specified in this sections throw getters
      */
+
     get buttonSettings() {
         return this.element.$(selector.buttonSettings);
     }
 
     get menuList() {
-        this.buttonSettings.click();
-        let elem = this.element.$(selector.menuList);
-        elem.waitForEnabled();
-        return elem;
+        return this.element.$(selector.menuList);
     }
 
     get menuArchived() {
-        return this.menuList.$(selector.menuArchive);
+        return this.element.$(selector.menuArchive);
     }
 
     /**
      * a methods to encapsulate automation code to interact with the element
      */
     archive() {
+        this.buttonSettings.click();
+        this.menuList.waitForDisplayed();
         this.menuArchived.click();
     }
 
