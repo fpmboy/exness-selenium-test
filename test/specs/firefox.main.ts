@@ -1,8 +1,8 @@
-import {SignInPage} from '../page/objects/signin.page';
-import {AccountsPage} from "../page/objects/accounts.page";
-import {getAccountWithRandomName as rndAccount} from '../config/config';
-import {newAccountPlatform, newAccountType} from '../config/config';
-import {Opts} from '../config/config';
+import { SignInPage } from '../page/objects/signin.page';
+import { AccountsPage } from "../page/objects/accounts.page";
+import { getAccountWithRandomName as rndAccount } from '../config/config';
+import { newAccountPlatform, newAccountType } from '../config/config';
+import { Opts } from '../config/config';
 
 
 const signInPage = new SignInPage();

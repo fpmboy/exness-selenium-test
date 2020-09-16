@@ -1,17 +1,10 @@
-import {AccountElement, AccountType} from "./account.element";
-
-const enum selector {
-    buttonSettings = `[class*=DropdownButton_container]`,
-    menuList = `[class*=ActionList_container]`,
-    menuArchive = `span=Archive account`,
-    numberAccount = './div[2]/div[1]/div[2]',
-    platformAccount = './div[2]/div[2]/div[2]'
-}
+import { AccountElement, AccountType } from './account.element';
+import { elementDemoAccount as selector } from  '../layout/desktop';
 
 export class DemoAccount extends AccountElement<AccountType> {
 
     /**
-     * all selectors are specified in this sections throw getters
+     * all selectors are used in this sections throw getters
      */
 
     get buttonSettings() {
@@ -52,12 +45,13 @@ export class DemoAccount extends AccountElement<AccountType> {
         return this._wdioElement;
     }
 
+    //not used
     get numberAccount(): string {
-        return this.element.$(selector.numberAccount).getText();
+        return '';
     }
 
     get platformAccount(): string {
-        return this.element.$(selector.platformAccount).getText();
+        return '';
     }
 
     waitOpened(options?: WebdriverIO.WaitForOptions): boolean {

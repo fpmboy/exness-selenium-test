@@ -1,18 +1,11 @@
 import { Page, PageType } from './page'
 import { AccountsPage } from './accounts.page'
-
-const enum selector {
-    formSignIn = `<signin-form>`,
-    inputLogin = `#login`,
-    inputPassword = `#password`,
-    btnSubmit = `button[type="submit"]`
-}
-const uri = '/accounts/sign-in';
+import { pageSignIn as selector } from '../layout/desktop'
 
 export class SignInPage extends Page {
 
     /**
-     * all selectors are specified in this sections throw getters
+     * all selectors are used in this sections throw getters
      */
     get formSignIn() {
         return $(selector.formSignIn);
@@ -58,6 +51,6 @@ export class SignInPage extends Page {
     }
 
     open ():Page {
-        return super.open(uri);
+        return super.open(selector.uri);
     }
 }

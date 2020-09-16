@@ -1,26 +1,11 @@
-import {Page, PageType} from './page'
-import {AccountUser, newAccountPlatform, newAccountType} from '../../config/config';
-
-const enum selector {
-    formNewDemoType = `[class*=OpenAccount_accountsTypes]`,
-    btnNewDemoStandard = `[href="/pa/new-account/mt5_mini_trial_vc"]`,
-    btnNewDemoRawSpread = `[href="/pa/new-account/mt5_raw_trial_vc"]`,
-    btnNewDemoZero = `[href="/pa/new-account/mt5_zero_trial_vc"]`,
-    btnNewDemoPro = `[href="pa/new-account/mt5_classic_trial_vc"]`,
-    formNewAccount = `[data-test="acc-form"]`,
-    btnRadioDemo = `./div[2]/div[1]`,
-    btnRadioMT4 = `./div[4]/div[1]`,
-    btnRadioMT5 = `./div[4]/div[2]`,
-    inputTitle = `#accName`,
-    inputPassword = `#password`,
-    btnCreateAccount = `[data-test="acc-form-submit"]`
-}
-const uri = '/pa/new-account/';
+import { Page, PageType } from './page'
+import { AccountUser, newAccountPlatform, newAccountType } from '../../config/config';
+import { pageNewAccount as selector } from "../layout/desktop";
 
 export class NewAccountPage extends Page {
 
     /**
-     * all selectors are specified in this sections throw getters
+     * all selectors are used in this sections throw getters
      */
     get formNewAccount(){
         return $(selector.formNewAccount);
@@ -70,7 +55,6 @@ export class NewAccountPage extends Page {
         return $(selector.btnNewDemoPro);
     }
 
-
     /**
      * a methods to encapsulate automation code to interact with the page
      */
@@ -79,7 +63,6 @@ export class NewAccountPage extends Page {
 
         this.formNewDemoType.waitForDisplayed(options);
 
-        //click on button to create account of correct type
         switch (accToCreate.type) {
             case newAccountType.Standard:
                 this.btnNewDemoStandard.click();
@@ -135,6 +118,6 @@ export class NewAccountPage extends Page {
     }
 
     open ():Page {
-        return super.open(uri);
+        return super.open(selector.uri);
     }
 }

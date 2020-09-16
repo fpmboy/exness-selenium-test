@@ -1,15 +1,10 @@
-import {AccountElement, AccountType} from "./account.element";
-
-const enum selector {
-    buttonReactivate = `button[data-test="account-card-restore-button"]`,
-    numberAccount = './div[2]',
-    platformAccount = './div[1]/div[2]'
-}
+import { AccountElement, AccountType } from "./account.element";
+import { elementArchivedAccount as selector } from '../layout/desktop';
 
 export class ArchivedAccount extends AccountElement<AccountType> {
 
     /**
-     * all selectors are specified in this sections throw getters
+     * all selectors are used in this sections throw getters
      */
     get buttonReactivate() {
         return this.element.$(selector.buttonReactivate);
@@ -32,6 +27,15 @@ export class ArchivedAccount extends AccountElement<AccountType> {
         return this._wdioElement;
     }
 
+    //not used
+    get numberAccount(): string {
+        return '';
+    }
+
+    get platformAccount(): string {
+        return '';
+    }
+
     waitOpened(options?: WebdriverIO.WaitForOptions): boolean {
         return this.element.waitForExist(options);
     }
@@ -39,13 +43,5 @@ export class ArchivedAccount extends AccountElement<AccountType> {
     waitLoaded(options?: WebdriverIO.WaitForOptions): boolean {
         return (this.waitOpened(options)
             && this.buttonReactivate.waitForDisplayed(options));
-    }
-
-    get numberAccount(): string {
-        return this.element.$(selector.numberAccount).getText();
-    }
-
-    get platformAccount(): string {
-        return this.element.$(selector.platformAccount).getText();
     }
 }

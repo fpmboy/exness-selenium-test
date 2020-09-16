@@ -1,28 +1,14 @@
-import {Page, PageType} from './page'
-import {NewAccountPage} from "./new.account.page";
-import {ArchivedAccount} from '../elements/archived.account.element';
-import {DemoAccount} from '../elements/demo.account.element';
-import {AccountUser} from '../../config/config';
-
-
-const enum selector {
-    formAccounts = `[name="accountsContainer"]`,
-    selectorSort = `#account_sort_select`,
-    togglerView = `[data-walkthrough="accountListMode"]`,
-    btnNewAccount = `[data-test="accounts-open-new-account-btn"]`,
-    notifyEmptyList = '[class*=AccountsPage_accountsPlaceholder]',
-    containerListAccounts = `[data-test="accounts-page-active-accounts-section"]`,
-    tabList = `[class*=Tabs_container]`,
-    tabDemo = `./div[2]`,
-    tabArchived = `./div[3]`,
-    alert = `[role="alert"]`,
-}
-const uri = '/pa/';
+import { Page, PageType } from './page'
+import { NewAccountPage } from './new.account.page';
+import { ArchivedAccount } from '../elements/archived.account.element';
+import { DemoAccount } from '../elements/demo.account.element';
+import { AccountUser } from '../../config/config';
+import { pageAccounts as selector } from "../layout/desktop";
 
 export class AccountsPage extends Page {
 
     /**
-     * all selectors are specified in this sections throw getters
+     * all selectors are used in this sections throw getters
      */
     get formAccounts() {
         return $(selector.formAccounts);
@@ -128,6 +114,6 @@ export class AccountsPage extends Page {
     }
 
     open (): Page {
-        return super.open(uri);
+        return super.open(selector.uri);
     }
 }
