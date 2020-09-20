@@ -1,7 +1,7 @@
 import { AccountElement, AccountType } from "./account.element";
 import { elementArchivedAccount as selector } from '../layout/desktop';
 
-export class ArchivedAccount extends AccountElement<AccountType> {
+export class ArchivedAccount extends AccountElement {
 
     /**
      * all selectors are used in this sections throw getters
@@ -17,10 +17,6 @@ export class ArchivedAccount extends AccountElement<AccountType> {
 
     constructor(protected _wdioElement: WebdriverIO.Element) {
         super(_wdioElement);
-    }
-
-    get elementType() {
-        return ArchivedAccount.type;
     }
 
     get element(): WebdriverIO.Element {

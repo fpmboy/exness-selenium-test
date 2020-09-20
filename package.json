@@ -4,7 +4,7 @@
   "description": "webdriverio web ui test task",
   "main": "index.js",
   "scripts": {
-    "tests-chrome-dev": "tsc && ./node_modules/.bin/wdio run cfg/chrome.wdio.conf.js --baseUrl 'https://dev-url.com/'" ,
+    "tests-chrome-dev": "tsc && ./node_modules/.bin/wdio run cfg/chrome.wdio.conf.js --baseUrl 'https://dev-url.com/'",
     "tests-chrome-prod": "tsc && ./node_modules/.bin/wdio run cfg/chrome.wdio.conf.js",
     "tests-firefox-prod": "tsc && ./node_modules/.bin/wdio run cfg/firefox.wdio.conf.js --baseUrl 'https://my.exness.com/'",
     "tests-parallel-prod": "tsc && ./node_modules/.bin/wdio run cfg/parallel.wdio.conf.js --baseUrl 'https://my.exness.com/'",

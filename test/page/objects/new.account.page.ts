@@ -59,24 +59,29 @@ export class NewAccountPage extends Page {
      * a methods to encapsulate automation code to interact with the page
      */
     createDemo(accToCreate: AccountUser) {
-        let options: WebdriverIO.WaitForOptions = {timeout: 5000, interval: 1000};
+        let options: WebdriverIO.WaitForOptions = {timeout: 10000, interval: 1000};
 
-        this.formNewDemoType.waitForDisplayed(options);
+        this.formNewDemoType.waitForClickable(options);
 
         switch (accToCreate.type) {
             case newAccountType.Standard:
+                this.btnNewDemoStandard.scrollIntoView();
                 this.btnNewDemoStandard.click();
                 break;
             case newAccountType.RawSpread:
+                this.btnNewDemoRawSpread.scrollIntoView();
                 this.btnNewDemoRawSpread.click();
                 break;
             case newAccountType.Zero:
+                this.btnNewDemoZero.scrollIntoView();
                 this.btnNewDemoZero.click();
                 break;
             case newAccountType.Pro:
+                this.btnNewDemoPro.scrollIntoView();
                 this.btnNewDemoPro.click();
                 break;
             default:
+                this.btnNewDemoStandard.scrollIntoView();
                 this.btnNewDemoStandard.click();
         }
 

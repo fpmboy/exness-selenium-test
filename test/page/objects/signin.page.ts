@@ -1,5 +1,4 @@
 import { Page, PageType } from './page'
-import { AccountsPage } from './accounts.page'
 import { pageSignIn as selector } from '../layout/desktop'
 
 export class SignInPage extends Page {
@@ -30,7 +29,6 @@ export class SignInPage extends Page {
         this.inputLogin.setValue(login);
         this.inputPassword.setValue(password);
         this.btnSubmit.click();
-        return new AccountsPage();
     }
 
     /**
@@ -38,19 +36,19 @@ export class SignInPage extends Page {
      */
     public static type = PageType.SignInPage;
 
-    waitOpened(options?: WebdriverIO.WaitForOptions) {
-        this.formSignIn.waitForExist(options);
+    waitOpened(options?: WebdriverIO.WaitForOptions): boolean {
+        return this.formSignIn.waitForExist(options);
     }
 
-    waitLoaded(options?: WebdriverIO.WaitForOptions) {
-        this.waitOpened(options);
-        this.formSignIn.waitForDisplayed(options);
-        this.inputLogin.waitForDisplayed(options);
-        this.inputPassword.waitForDisplayed(options);
-        this.btnSubmit.waitForDisplayed(options);
+    waitLoaded(options?: WebdriverIO.WaitForOptions): boolean {
+        return (this.waitOpened(options)
+            && this.formSignIn.waitForDisplayed(options)
+            && this.inputLogin.waitForDisplayed(options)
+            && this.inputPassword.waitForDisplayed(options)
+            && this.btnSubmit.waitForDisplayed(options));
     }
 
-    open ():Page {
+    open (): Page {
         return super.open(selector.uri);
     }
 }

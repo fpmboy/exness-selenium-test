@@ -18,6 +18,10 @@ export class AccountsPage extends Page {
         return $(selector.selectorSort);
     }
 
+    get selectorNewestSort() {
+        return $(selector.selectorNewestSort);
+    }
+
     get togglerView() {
         return $(selector.togglerView);
     }
@@ -53,47 +57,45 @@ export class AccountsPage extends Page {
     /**
      * a methods to encapsulate automation code to interact with the page
      */
-    private getAccount(titleAccount: string): WebdriverIO.Element {
-        this.listAccounts.waitForEnabled();
-        let elementToFind = this.listAccounts.$$('./div').filter(
-            el => el.getText().includes(titleAccount));
-        return elementToFind.pop();
+    switchGridView(options?: WebdriverIO.WaitForOptions) {
+        this.togglerView.waitForClickable(options);
+        this.togglerView.$(selector.togglerGridView).click();
+    }
+
+    switchNewestSort(options?: WebdriverIO.WaitForOptions) {
+        this.selectorSort.waitForClickable(options);
+        this.selectorSort.click();
+        this.selectorNewestSort.waitForClickable(options);
+        this.selectorNewestSort.click();
+    }
+
+    private getAccount(account: AccountUser): WebdriverIO.Element {
+        if (this.notifyEmptyList.getText().length == 0) {
+            let elementToFind = this.listAccounts.$$('./div').filter(
+                el => el.getText().includes(account.title));
+            return elementToFind.pop();
+        }
+        return undefined;
     }
 
     openNewDemo(accToCreate: AccountUser) {
         this.buttonNewAccount.click();
         new NewAccountPage().createDemo(accToCreate);
-        this.formAccounts.waitUntil(() => this.getAccount(accToCreate.title) !== undefined,
+        this.formAccounts.waitUntil(() => this.getAccount(accToCreate) !== undefined,
             {
                 timeout: 15000,
                 interval: 1000,
                 timeoutMsg: `New Demo ${accToCreate.type + accToCreate.title} should appear in 15! sec`
             }
         );
-        this.alert.waitForExist({timeout: 10000, interval: 1000, reverse: true});
     }
 
     getDemo(account: AccountUser): DemoAccount {
-        this.tabDemo.click();
-        this.switchListView();
-        let accountUser = null;
-        if (this.notifyEmptyList.getText().length == 0) {
-            this.listAccounts.waitForDisplayed({timeout: 7000, interval: 1000});
-            accountUser = this.getAccount(account.title);
-
-        }
-        return new DemoAccount(accountUser);
+        return new DemoAccount(this.getAccount(account));
     }
 
     getArchived(account: AccountUser): ArchivedAccount {
-        this.tabArchived.click();
-        this.switchListView();
-        this.listAccounts.waitForDisplayed({timeout: 7000, interval: 1000});
-        return new ArchivedAccount(this.getAccount(account.title));
-    }
-
-    switchListView() {
-        this.togglerView.$('./div[2]').click();
+        return new ArchivedAccount(this.getAccount(account));
     }
 
     /**
@@ -101,16 +103,16 @@ export class AccountsPage extends Page {
      */
     public static type = PageType.AccountsPage;
 
-    waitOpened(options?: WebdriverIO.WaitForOptions) {
-        this.formAccounts.waitForExist(options);
+    waitOpened(options?: WebdriverIO.WaitForOptions): boolean {
+        return this.formAccounts.waitForExist(options);
     }
 
-    waitLoaded(options?: WebdriverIO.WaitForOptions) {
-        this.waitOpened(options);
-        this.formAccounts.waitForDisplayed(options)
-        this.selectorSort.waitForDisplayed(options)
-        this.togglerView.waitForDisplayed(options)
-        this.buttonNewAccount.waitForDisplayed(options);
+    waitLoaded(options?: WebdriverIO.WaitForOptions): boolean {
+        return (this.waitOpened(options)
+            && this.formAccounts.waitForDisplayed(options)
+            && this.selectorSort.waitForDisplayed(options)
+            && this.togglerView.waitForDisplayed(options)
+            && this.buttonNewAccount.waitForDisplayed(options));
     }
 
     open (): Page {

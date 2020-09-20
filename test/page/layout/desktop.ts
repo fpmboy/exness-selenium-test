@@ -11,7 +11,9 @@ export const enum elementDemoAccount {
 export const enum pageAccounts {
     formAccounts = `[name="accountsContainer"]`,
     selectorSort = `#account_sort_select`,
+    selectorNewestSort = `#list_account_sort_select_NEWEST`,
     togglerView = `[data-walkthrough="accountListMode"]`,
+    togglerGridView = `./div[2]`,
     btnNewAccount = `[data-test="accounts-open-new-account-btn"]`,
     notifyEmptyList = '[class*=AccountsPage_accountsPlaceholder]',
     containerListAccounts = `[data-test="accounts-page-active-accounts-section"]`,

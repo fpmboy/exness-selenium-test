@@ -4,12 +4,12 @@ let wdioConf = require('./wdio.conf.js');
 exports.config = merge(wdioConf.config, {
     // url where to run test
     baseUrl: 'https://my.exness.com/',
-
+    //
     // list of files to run
     specs: [
         './build/test/specs/firefox.main.js'
     ],
-
+    //
     capabilities: [
         {
             maxInstances: 1,

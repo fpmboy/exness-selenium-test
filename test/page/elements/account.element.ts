@@ -8,9 +8,8 @@ export enum AccountType {
     Real = 'Real'
 }
 
-export abstract class AccountElement <T extends AccountType>{
+export abstract class AccountElement {
     public static type: AccountType;
-    abstract get elementType(): T;
 
     public abstract waitOpened(options?: WebdriverIO.WaitForOptions): boolean;
     public abstract waitLoaded(options?: WebdriverIO.WaitForOptions): boolean;
