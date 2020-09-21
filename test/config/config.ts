@@ -47,13 +47,13 @@ export const Opts: { [key: string]: Options[] } = {
         ],
     prod: [
         { user: {
-                login: 'danenkouskrill@gmail.com',
+                login: 'rbfx.test.kdanenkov@gmail.com',
                 password: 'Ex11235813',
                 newAccount: getAccountWithRandomName(4)
             }
         },
         { user: {
-                login: 'fpmboy@gmail.com',
+                login: 'rbfx.test.kdanenkov+test@gmail.com',
                 password: 'Ex11235813',
                 newAccount: getAccountWithRandomName(4)
             }

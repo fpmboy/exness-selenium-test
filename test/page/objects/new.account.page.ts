@@ -61,7 +61,7 @@ export class NewAccountPage extends Page {
     createDemo(accToCreate: AccountUser) {
         let options: WebdriverIO.WaitForOptions = {timeout: 10000, interval: 1000};
 
-        this.formNewDemoType.waitForClickable(options);
+        this.formNewDemoType.waitForDisplayed(options);
 
         switch (accToCreate.type) {
             case newAccountType.Standard:

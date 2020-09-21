@@ -14,6 +14,10 @@ export class AccountsPage extends Page {
         return $(selector.formAccounts);
     }
 
+    get loaderBusy() {
+        return $(selector.loaderBusy);
+    }
+
     get selectorSort() {
         return $(selector.selectorSort);
     }
@@ -63,9 +67,10 @@ export class AccountsPage extends Page {
     }
 
     switchNewestSort(options?: WebdriverIO.WaitForOptions) {
-        this.selectorSort.waitForClickable(options);
+        this.selectorSort.waitForDisplayed(options);
         this.selectorSort.click();
-        this.selectorNewestSort.waitForClickable(options);
+        this.loaderBusy.waitForDisplayed({ timeout: 5000, reverse: true});
+        this.selectorNewestSort.waitForDisplayed(options);
         this.selectorNewestSort.click();
     }
 

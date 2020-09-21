@@ -17,6 +17,7 @@ export const enum pageAccounts {
     btnNewAccount = `[data-test="accounts-open-new-account-btn"]`,
     notifyEmptyList = '[class*=AccountsPage_accountsPlaceholder]',
     containerListAccounts = `[data-test="accounts-page-active-accounts-section"]`,
+    loaderBusy = `[class*=AccountsPage_busy]`,
     tabList = `[class*=Tabs_container]`,
     tabDemo = `./div[2]`,
     tabArchived = `./div[3]`,
