@@ -7,7 +7,7 @@ As a user, I want to be able to archive a demo account and validate the account 
 We would like to see your own tests which cover the user story mentioned above.
 
 ## Dependencies
-- nodejs
+- node
 - npm
 - package.json
     * "@types/mocha" - typings for test runner mocha
@@ -24,9 +24,24 @@ We would like to see your own tests which cover the user story mentioned above.
     * "typescript" - framework implementing types in js
     * "wdio-chromedriver-service" - service to automatically start chromedriver
     * "wdio-geckodriver-service" - service to automatically start geckodriver
+    *  "@wdio/allure-reporter" - allure reporter to gather data from wdio test runner
+    * "allure-commandline" - allure reporter to generate html and launch browser localy to view it
+    
 
 ## Install process
-System should have installed Google Chrome and Firefox. Also globally installed **node** and **npm**
+1) System should have installed **Google Chrome** and **Firefox**. 
+
+2) Globally installed **node** (it goes with **npm** by default)
+
+On MacOS from terminal:
+```
+brew install node
+```
+or check https://nodejs.org/en/download/
+
+
+
+3) Install all dependencies from *package.json* by running in terminal
 ```
 npm install
 ```
@@ -42,11 +57,14 @@ npm -v
 ## Execute tests
 Check **scripts** sections in *package.json*
 
-To start tests type in console
+To start tests, type in terminal
 ```
 npm run tests-chrome-prod
-npm run tests-firefox-prod
 npm run tests-parallel-prod
+```
+To generate html reports with allure, type in terminal
+```
+npm run allure-view
 ```
 
 ## Implemented features
@@ -59,7 +77,7 @@ Parameter **outputDir** in *./cfg/wdio.conf.js* will log all WebDriver commands 
 Hook **afterTest** in *./cfg/wdio.conf.js* if error, save screenshot to ./screenshot folder
 
 * #### generation human-readable report;
-Parameter **reporters** in *./cfg/wdio.conf.js* implemented spec reporter
+Parameter **reporters** in *./cfg/wdio.conf.js* implemented spec reporter + allure 
 
 * #### generating random values for insignificant test data, for example, for new trading account;
 Method **getAccountWithRandomName** in *./test/config/config.ts* for generating random postfix of account title
