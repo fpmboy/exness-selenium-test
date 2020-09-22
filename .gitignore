@@ -3,7 +3,4 @@ node_modules
 .DS_Store
 .idea
 *.js.map
-logs/*
-*.log
-screenshots/*
-*.png
+allure-report

@@ -7,7 +7,7 @@ exports.config = merge(wdioConf.config, {
     //
     // list of files to run
     specs: [
-        './build/test/specs/firefox.main.js'
+        './build/test/specs/grid.js'
     ],
     //
     capabilities: [

@@ -54,8 +54,8 @@ export class AccountsPage extends Page {
         return $(selector.notifyEmptyList);
     }
 
-    get alert() {
-        return $(selector.alert);
+    get alertCloseButton() {
+        return $(selector.alertCloseButton);
     }
 
     /**
@@ -64,6 +64,11 @@ export class AccountsPage extends Page {
     switchGridView(options?: WebdriverIO.WaitForOptions) {
         this.togglerView.waitForClickable(options);
         this.togglerView.$(selector.togglerGridView).click();
+    }
+
+    switchListView(options?: WebdriverIO.WaitForOptions) {
+        this.togglerView.waitForClickable(options);
+        this.togglerView.$(selector.togglerListView).click();
     }
 
     switchNewestSort(options?: WebdriverIO.WaitForOptions) {

@@ -1,6 +1,6 @@
 {
   "name": "exness-selenium-test",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "webdriverio web ui test task",
   "main": "index.js",
   "scripts": {
@@ -8,6 +8,7 @@
     "tests-chrome-prod": "tsc && ./node_modules/.bin/wdio run cfg/chrome.wdio.conf.js",
     "tests-firefox-prod": "tsc && ./node_modules/.bin/wdio run cfg/firefox.wdio.conf.js --baseUrl 'https://my.exness.com/'",
     "tests-parallel-prod": "tsc && ./node_modules/.bin/wdio run cfg/parallel.wdio.conf.js --baseUrl 'https://my.exness.com/'",
+    "allure-view": "node ./node_modules/.bin/allure generate --clean && node ./node_modules/.bin/allure open",
     "cleanup": "rm -rf ./logs/* && rm -rf ./screenshots/*"
   },
   "repository": {
@@ -16,8 +17,9 @@
   },
   "keywords": [
     "selenium",
-    "appium",
-    "webdriverio"
+    "webdriverio",
+    "mocha",
+    "allure"
   ],
   "author": "fpmboy@gmail.com",
   "license": "ISC",
@@ -27,11 +29,13 @@
   "homepage": "https://github.com/fpmboy/exness-selenium-test#readme",
   "devDependencies": {
     "@types/mocha": "^8.0.3",
+    "@wdio/allure-reporter": "^6.5.2",
     "@wdio/cli": "^6.4.6",
     "@wdio/local-runner": "^6.4.6",
     "@wdio/mocha-framework": "^6.4.0",
     "@wdio/spec-reporter": "^6.4.0",
     "@wdio/sync": "^6.4.6",
+    "allure-commandline": "^2.13.0",
     "chromedriver": "^85.0.0",
     "deepmerge": "^4.2.2",
     "geckodriver": "^1.20.0",

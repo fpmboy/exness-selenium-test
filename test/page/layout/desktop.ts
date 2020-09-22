@@ -13,6 +13,7 @@ export const enum pageAccounts {
     selectorSort = `#account_sort_select`,
     selectorNewestSort = `#list_account_sort_select_NEWEST`,
     togglerView = `[data-walkthrough="accountListMode"]`,
+    togglerListView = `./div[1]`,
     togglerGridView = `./div[2]`,
     btnNewAccount = `[data-test="accounts-open-new-account-btn"]`,
     notifyEmptyList = '[class*=AccountsPage_accountsPlaceholder]',
@@ -21,7 +22,7 @@ export const enum pageAccounts {
     tabList = `[class*=Tabs_container]`,
     tabDemo = `./div[2]`,
     tabArchived = `./div[3]`,
-    alert = `[role="alert"]`,
+    alertCloseButton = `[class*=NotifierCloseButton]`,
     uri = '/pa/',
 }
 
@@ -30,7 +31,7 @@ export const enum pageNewAccount {
     btnNewDemoStandard = `[href="/pa/new-account/mt5_mini_trial_vc"]`,
     btnNewDemoRawSpread = `[href="/pa/new-account/mt5_raw_trial_vc"]`,
     btnNewDemoZero = `[href="/pa/new-account/mt5_zero_trial_vc"]`,
-    btnNewDemoPro = `[href="pa/new-account/mt5_classic_trial_vc"]`,
+    btnNewDemoPro = `[href="/pa/new-account/mt5_classic_trial_vc"]`,
     formNewAccount = `[data-test="acc-form"]`,
     btnRadioDemo = `./div[2]/div[1]`,
     btnRadioMT4 = `./div[4]/div[1]`,
